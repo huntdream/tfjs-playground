@@ -1,0 +1,14 @@
+.config {
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding: 20px;
+  background-color: #000;
+  color: #fff;
+}
+
+.container {
+  width: 400px;
+  height: 400px;
+  display: flex;
+}
