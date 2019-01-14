@@ -75,6 +75,12 @@ module.exports = {
       template: path.resolve(__dirname, './index.html'),
       chunks: ['app']
     }),
+    new HtmlPlugin({
+      title: 'Linear Regression',
+      filename: 'linear-regression',
+      template: path.resolve(__dirname, './src/linear-regression/index.html'),
+      chunks: ['app']
+    }),
     new MiniCssExtractPlugin({
       filename: './css/[name].css',
       chunkFilename: './css/[name].css'
