@@ -1,12 +1,12 @@
 import * as tf from '@tensorflow/tfjs';
 import generateData from './data';
+import { plotData, plotPredictions } from './ui';
 
-function linearRegression() {
+function linearRegression(trueCoefficients) {
   // Generate random variables
   const a = tf.variable(tf.scalar(Math.random()));
   const b = tf.variable(tf.scalar(Math.random()));
   const c = tf.variable(tf.scalar(Math.random()));
-  const d = tf.variable(tf.scalar(Math.random()));
 
   // Iteration number for epoch
   const numIterations = 80;
@@ -21,10 +21,9 @@ function linearRegression() {
   function predict(x) {
     return tf.tidy(() => {
       return a
-        .mul(x.pow(tf.scalar(3, 'int32')))
-        .add(b.mul(x.square()))
-        .add(c.mul(x))
-        .add(d);
+        .mul(x.pow(tf.scalar(2)))
+        .add(b.mul(x))
+        .add(c);
     });
   }
 
@@ -50,19 +49,15 @@ function linearRegression() {
 
   // Learn coefficient
   async function learnCoefficient() {
-    const trueCoefficients = { a: -0.8, b: -0.2, c: 0.9, d: 0.5 };
-
     const trainingData = generateData(100, trueCoefficients);
-    console.log(trainingData);
+
+    await plotData(trainingData.xs, trainingData.ys);
 
     await train(trainingData.xs, trainingData.ys, numIterations);
-    console.log(trueCoefficients);
-    console.log(
-      a.dataSync()[0],
-      b.dataSync()[0],
-      c.dataSync()[0],
-      d.dataSync()[0]
-    );
+
+    const predictionAfter = predict(trainingData.xs);
+
+    await plotPredictions(trainingData.xs, trainingData.ys, predictionAfter);
   }
 
   learnCoefficient();
