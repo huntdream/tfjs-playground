@@ -9,8 +9,23 @@
 </head>
 
 <body>
-  <div style="width: 600px;margin: 0 auto">
-    <canvas width="600" height="600"></canvas>
+  <div class="config">
+    <div class="item" data-type="a">
+      <label for="a">a:</label>
+      <input type="range" min="-10" max="10" id="a">
+    </div>
+    <div class="item" data-type="b">
+      <label for="b">b:</label>
+      <input type="range" min="-10" max="10" id="b">
+    </div>
+    <div class="item" data-type="c">
+      <label for="c">c:</label>
+      <input type="range" min="-10" max="10" id="c">
+    </div>
+  </div>
+  <div class="container">
+    <canvas id="data-chart" width="600" height="600"></canvas>
+    <canvas id="pred-chart" width="600" height="600"></canvas>
   </div>
 </body>
 
